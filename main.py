@@ -1,3 +1,5 @@
+import json
+
 notes = []
 
 
@@ -30,3 +32,24 @@ def search_notes(keyword):
 # Test the new feature
 add_note("Learn Python")
 print("Search results for 'book':", search_notes("book"))
+
+
+def save_notes_to_file(filename="notes.json"):
+    with open(filename, "w") as file:
+        json.dump(notes, file)
+
+
+def load_notes_from_file(filename="notes.json"):
+    global notes
+    try:
+        with open(filename, "r") as file:
+            notes = json.load(file)
+    except FileNotFoundError:
+        notes = []
+
+
+# Test persistence
+load_notes_from_file()
+add_note("Call the doctor")
+save_notes_to_file()
+print("Notes saved to file and reloaded:", view_notes())
