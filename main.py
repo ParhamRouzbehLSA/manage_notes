@@ -16,3 +16,10 @@ add_note("Read a book")
 print("All notes:", view_notes())
 delete_note(0)
 print("Notes after deletion:", view_notes())
+
+def search_notes(keyword):
+    return [note for note in notes if keyword in note]
+
+# Test the new feature
+add_note("Learn Python")
+print("Search results for 'book':", search_notes("book"))
